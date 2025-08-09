@@ -67,16 +67,3 @@ def read_file(repo, file_path):
         print(f"Error reading file {file_path}: {e}")
         return None
 
-repo = load_repo("https://github.com/yuvraj-kumar-dev/samay.git")
-file_paths = list_file_paths(repo)
-        
-OUTPUT = "output.txt"
-
-# Write all file contents to output.txt
-
-with open(OUTPUT, "w", encoding="utf-8") as f:
-    for file_path in file_paths:
-        content = read_file(repo, file_path)
-        if content:
-            f.write(f"File: {file_path}\n")
-            f.write(content + "\n\n")

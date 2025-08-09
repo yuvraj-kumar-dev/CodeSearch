@@ -5,6 +5,7 @@ from streamlit_option_menu import option_menu
 import pandas as pd
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.embeddings import HuggingFaceEmbeddings
+import os
 
 prompt = ChatPromptTemplate.from_template(
     """
@@ -23,7 +24,7 @@ llm = Ollama(model="codellama:7b")
 from langchain.chains.combine_documents import create_stuff_documents_chain
 document_chain = create_stuff_documents_chain(llm, prompt)
 
-from langchain.embeddings import OllamaEmbeddings
+# from langchain.embeddings import OllamaEmbeddings
 from langchain.vectorstores import FAISS
 
 # 1. Load the saved vectorstore
@@ -73,7 +74,9 @@ if selected == "CodeBase":
                     if content:
                         f.write(f"File: {file_path}\n")
                         f.write(content + "\n\n")
-            create_vector_store()
+            create_vector_store("output.txt")
+            if os.path.exists("Output.txt"):
+                os.remove("output.txt")
             st.success("Vector store created successfully!")
             codebase.append(repo_url)    
             

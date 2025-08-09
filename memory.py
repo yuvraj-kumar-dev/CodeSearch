@@ -1,9 +1,9 @@
 from langchain_community.document_loaders import TextLoader
 
-def create_vector_store():
+def create_vector_store(file_path="output.txt"):
     #Data Ingestion
 
-    data = TextLoader("output.txt", encoding="utf-8")
+    data = TextLoader(file_path, encoding="utf-8")
     docs = data.load()
 
     #Chunks
@@ -30,4 +30,3 @@ def create_vector_store():
     # Step 3: Save vectorstore locally
     db.save_local("faiss_index")
 
-create_vector_store()
